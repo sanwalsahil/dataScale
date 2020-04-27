@@ -94,8 +94,9 @@
                                     <a href="{{url('/login')}}">Log in</a>
                                 @endif
                                 </div>
+
                                 <div class="d-none d-lg-block">
-                                    <a class="boxed-btn3" href="#">Post a Job</a>
+                                    <a class="boxed-btn3" href="{{url('/register')}}">Register</a>
                                 </div>
                             </div>
                         </div>

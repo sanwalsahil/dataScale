@@ -2,11 +2,12 @@
 
 @section('content')
     <x-frontend.banner1 :bgUrl="asset('frontend/img/banner/illustration.png')">
-        <h5 class="wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".2s">4536+ Jobs listed</h5>
-        <h3 class="wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".3s">Find your Dream Job</h3>
-        <p class="wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".4s">We provide online instant cash loans with quick approval that suit your term length</p>
+        <h5 class="wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".2s">Get connected with DataScale Today</h5>
+        <h3 class="wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".3s">Data Is Power</h3>
+        <p class="wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".4s">Get connected to Scale Data for others or find someone to scale your data</p>
         <div class="sldier_btn wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".5s">
-            <a href="#" class="boxed-btn3">Upload your Resume</a>
+            <a href="@if(Auth::check()){{url('/postRequirement')}}@else{{url('/login')}}@endif" class="boxed-btn3">Post A Requirement</a>
+            <a href="@if(Auth::check()){{url('/registerCompanies')}}@else{{url('/login')}}@endif" class="boxed-btn3">Register Company</a>
         </div>
     </x-frontend.banner1>
 
@@ -128,8 +129,8 @@ $categories = [
         <div class="row">
             <div class="col-lg-5 offset-lg-1 col-md-6">
                 <div class="searching_text">
-                    <h3>Looking for a Job?</h3>
-                    <p>We provide online instant cash loans with quick approval </p>
+                    <h3>Realise Potential Of Data?</h3>
+                    <p>Get connected to Scale Data for others or find someone to scale your data </p>
                     <a href="#" class="boxed-btn3">Browse Job</a>
                 </div>
             </div>
@@ -137,7 +138,8 @@ $categories = [
                 <div class="searching_text">
                     <h3>Looking for a Expert?</h3>
                     <p>We provide online instant cash loans with quick approval </p>
-                    <a href="#" class="boxed-btn3">Post a Job</a>
+                    <a href="#" class="boxed-btn3">Post a Requirement</a>
+                    <a href="#" class="boxed-btn3">Register You Company</a>
                 </div>
             </div>
         </div>

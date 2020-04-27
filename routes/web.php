@@ -29,6 +29,15 @@ Route::get('/contactUs', function () {
     return view('frontend.contact_us');
 });
 
+
+/***************************** REGISTER COMPANIES ***********************/
+Route::group(['middleware'=>['auth']],function(){
+    Route::get('/registerCompanies',function(){
+        return view('frontend.company.register');
+    });
+});
+
+
 Auth::routes();
 
 Auth::routes();

@@ -31,12 +31,13 @@ Route::get('/contactUs', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
 
-Route::group(['middleware' => 'auth'], function () {
+
+Route::group(['middleware' => ['auth','can:backend.user.check']], function () {
+
+    Route::get('/home', 'HomeController@index')->name('home');
 
     /***** company lists ******/
     Route::get('/all_companies',function(){

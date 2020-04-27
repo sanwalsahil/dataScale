@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\User;
 use App\Role;
+use Auth;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -73,5 +74,15 @@ class RegisterController extends Controller
         $role = Role::select('id')->where('name','user')->first();
         $user->roles()->attach($role);
         return $user;
+    }
+    protected function redirectTo(){
+        $user = new User();
+        $backendUser = null;
+        $backendUser = $user->containsRole(Auth::user(),['admin','manager']);
+
+        if($backendUser != 1){
+            return '/';
+        }
+        return '/home';
     }
 }

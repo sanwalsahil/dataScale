@@ -42,11 +42,12 @@ class LoginController extends Controller
 
     protected function redirectTo(){
         $user = new User();
+        $backendUser = null;
         $backendUser = $user->containsRole(Auth::user(),['admin','manager']);
 
         if($backendUser != 1){
-            redirect('/');
-
+            return '/';
         }
+        return '/home';
     }
 }

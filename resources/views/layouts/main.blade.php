@@ -69,6 +69,13 @@
 {{--                                            </ul>--}}
 {{--                                        </li>--}}
                                         <li><a href="{{url('/contactUs')}}">Contact</a></li>
+                                        <li>
+                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                @csrf
+                                            </form>
+                                            <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">{{ __('Log out') }}</a>
+
+                                        </li>
                                     </ul>
                                 </nav>
                             </div>
@@ -76,7 +83,7 @@
                         <div class="col-xl-3 col-lg-3 d-none d-lg-block">
                             <div class="Appointment">
                                 <div class="phone_num d-none d-xl-block">
-                                    <a href="{{url('/home')}}">Log in</a>
+                                    <a href="{{url('/login')}}">Log in</a>
                                 </div>
                                 <div class="d-none d-lg-block">
                                     <a class="boxed-btn3" href="#">Post a Job</a>

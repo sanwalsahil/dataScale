@@ -47,14 +47,21 @@ class CompanyDetailController extends Controller
     public function store(Request $request)
     {
 
+        if($file = $request->file('logo')){
+            $path = $file->store('frontend/company_images/logo');
+        }else{
+            $path = 'frontend/company_images/logo/default-logo.png';
+        }
+
         $validationData = $request->validate([
             'name'=>'required',
             'address1'=>'required',
-            'city_id'=>'required',
-            'state_id'=>'required',
-            'zip'=>'required',
-            'number'=>'required',
-            'email'=>'required'
+            'city_id'=>'required|numeric',
+            'state_id'=>'required|numeric',
+            'zip'=>'required|numeric',
+            'number'=>'required|numeric',
+            'email'=>'required|email',
+            'description'=>'required'
         ],[
             'name.required'=>'Company Name is Required',
             'address1.required'=>'At Least One Address Line Needs To Be Mentioned',
@@ -62,7 +69,11 @@ class CompanyDetailController extends Controller
             'state_id.required'=>'Please Select State Where Your Company Is Located',
             'zip.required'=>'Please Enter Zip Postal Code Of Location',
             'number.required'=>'Please Enter Contact Number',
-            'email.required'=>'Please Enter Email Address'
+            'description.required'=>'Please Enter Company Description',
+            'email.required'=>'Please Enter Email Address',
+            'zip.numeric'=>'Zip Postal Code Must Be Numeric',
+            'number.numeric'=>'Contact Number Must Be Numeric',
+            'email.email'=>'Please Enter Email In Correct Format'
         ]);
 
         $company = new CompanyDetail();
@@ -74,6 +85,9 @@ class CompanyDetailController extends Controller
         $company->state_id = $request->input('state_id');
         $company->zip = $request->input('zip');
         $company->user_id = Auth::user()->id;
+        $company->description = $request->input('description');
+        $company->logo_path = $path;
+        $company->website = $request->input('website');
         $company->save();
 
         $number = new CompanyContactNumber();

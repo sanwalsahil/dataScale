@@ -28,6 +28,12 @@
 
     <link rel="stylesheet" href="{{asset('frontend/css/style.css')}}">
     <!-- <link rel="stylesheet" href="css/responsive.css"> -->
+
+    <script src="{{asset('frontend/js/vendor/modernizr-3.5.0.min.js')}}"></script>
+    <script src="{{asset('frontend/js/vendor/jquery-1.12.4.min.js')}}"></script>
+    <script src="{{asset('frontend/js/popper.min.js')}}"></script>
+    <script src="{{asset('frontend/js/bootstrap.min.js')}}"></script>
+
 </head>
 
 <body>
@@ -220,10 +226,8 @@
 
 <!-- link that opens popup -->
 <!-- JS here -->
-<script src="{{asset('frontend/js/vendor/modernizr-3.5.0.min.js')}}"></script>
-<script src="{{asset('frontend/js/vendor/jquery-1.12.4.min.js')}}"></script>
-<script src="{{asset('frontend/js/popper.min.js')}}"></script>
-<script src="{{asset('frontend/js/bootstrap.min.js')}}"></script>
+
+
 <script src="{{asset('frontend/js/owl.carousel.min.js')}}"></script>
 <script src="{{asset('frontend/js/isotope.pkgd.min.js')}}"></script>
 <script src="{{asset('frontend/js/ajax-form.js')}}"></script>

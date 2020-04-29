@@ -29,7 +29,7 @@
 
 
 
-                        <form action="{{url('/saveCompany')}}" method="post">
+                        <form action="{{url('/saveCompany')}}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="row">
                             <div class="col-md-6">
@@ -38,7 +38,7 @@
                                            onfocus="this.placeholder = ''" onblur="this.placeholder = 'Company Name'"
                                            class="single-input">
                                     @error('name')
-                                    <div class="alert-danger" style="background-color:white;padding-right:10px">{{ $message }}</div>
+                                    <div class="alert-danger" style="background-color:white;padding-left:10px">{{ $message }}</div>
                                     @enderror
                                 </div>
                                 <div class="mt-10">
@@ -46,7 +46,7 @@
                                            onfocus="this.placeholder = ''" onblur="this.placeholder = 'Address line 1'"
                                            class="single-input">
                                     @error('address1')
-                                    <div class="alert-danger" style="background-color:white;padding-right:10px">{{ $message }}</div>
+                                    <div class="alert-danger" style="background-color:white;padding-left:10px">{{ $message }}</div>
                                     @enderror
                                 </div>
                                 <div class="mt-10">
@@ -64,8 +64,12 @@
                                            onfocus="this.placeholder = ''" onblur="this.placeholder = 'Zip Code'"
                                            class="single-input">
                                     @error('zip')
-                                    <div class="alert-danger" style="background-color:white;padding-right:10px">{{ $message }}</div>
+                                    <div class="alert-danger" style="background-color:white;padding-left:10px">{{ $message }}</div>
                                     @enderror
+                                </div>
+                                <div class="mt-10">
+								<textarea name="description" class="single-textarea" placeholder="Company Description" onfocus="this.placeholder = ''"
+                                          onblur="this.placeholder = 'Company Description'" required></textarea>
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -74,7 +78,7 @@
                                            onfocus="this.placeholder = ''" onblur="this.placeholder = 'Contact Number'"
                                            class="single-input">
                                     @error('number')
-                                    <div class="alert-danger" style="background-color:white;padding-right:10px">{{ $message }}</div>
+                                    <div class="alert-danger" style="background-color:white;padding-left:10px">{{ $message }}</div>
                                     @enderror
                                 </div>
                                 <div class="mt-10">
@@ -82,7 +86,7 @@
                                            onfocus="this.placeholder = ''" onblur="this.placeholder = 'Contact Email'"
                                            class="single-input">
                                     @error('email')
-                                    <div class="alert-danger" style="background-color:white;padding-right:10px">{{ $message }}</div>
+                                    <div class="alert-danger" style="background-color:white;padding-left:10px">{{ $message }}</div>
                                     @enderror
                                 </div>
                                 <div class="input-group-icon mt-10">
@@ -96,7 +100,7 @@
                                     </select>
                                     </div>
                                     @error('city_id')
-                                    <div class="alert-danger" style="background-color:white;padding-right:10px">{{ $message }}</div>
+                                    <div class="alert-danger" style="background-color:white;padding-left:10px">{{ $message }}</div>
                                     @enderror
 
                                 </div>
@@ -111,14 +115,24 @@
                                     </select>
                                     </div>
                                     @error('state_id')
-                                    <div class="alert-danger" style="background-color:white;padding-right:10px">{{ $message }}</div>
+                                    <div class="alert-danger" style="background-color:white;padding-left:10px">{{ $message }}</div>
                                     @enderror
                                 </div>
+                                <div class="mt-10">
+                                    <input type="text" name="website" placeholder="Company Website"
+                                           onfocus="this.placeholder = ''" onblur="this.placeholder = 'Company Website'"
+                                           class="single-input">
+
+                                </div>
                                 <div class="input-group-icon mt-10">
-                                    <input type="submit" class="btn btn-primary" style="width:100%">
+                                    Upload Logo : <input type="file" name="logo">
                                 </div>
 
+
                             </div>
+                            </div>
+                            <div class="input-group-icon mt-10">
+                                <input type="submit" class="btn btn-primary" style="width:100%">
                             </div>
                         </form>
 

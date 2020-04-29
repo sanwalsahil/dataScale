@@ -47,6 +47,24 @@ class CompanyDetailController extends Controller
     public function store(Request $request)
     {
 
+        $validationData = $request->validate([
+            'name'=>'required',
+            'address1'=>'required',
+            'city_id'=>'required',
+            'state_id'=>'required',
+            'zip'=>'required',
+            'number'=>'required',
+            'email'=>'required'
+        ],[
+            'name.required'=>'Company Name is Required',
+            'address1.required'=>'At Least One Address Line Needs To Be Mentioned',
+            'city_id.required'=>'Please Select City Where Your Company Is Located',
+            'state_id.required'=>'Please Select State Where Your Company Is Located',
+            'zip.required'=>'Please Enter Zip Postal Code Of Location',
+            'number.required'=>'Please Enter Contact Number',
+            'email.required'=>'Please Enter Email Address'
+        ]);
+
         $company = new CompanyDetail();
         $company->name = $request->input('name');
         $company->address1 = $request->input('address1');

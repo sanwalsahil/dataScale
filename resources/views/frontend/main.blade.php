@@ -1,5 +1,7 @@
 @extends('layouts.main')
-
+<?php
+$subtext = ['fa-map-marker'=>'location']
+?>
 @section('content')
     <x-frontend.banner1 :bgUrl="asset('frontend/img/banner/illustration.png')">
         <h5 class="wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".2s">Get connected with DataScale Today</h5>
@@ -72,7 +74,7 @@
                 </div>
             </div>
         </div>
-    <x-frontend.lists />
+        <x-frontend.lists :data="$companies" :subtext="$subtext" nameRedirect="companyDetails" action1Redirect="companyDetails"/>
     </div>
 </div>
 <!-- job_listing_area_end  -->

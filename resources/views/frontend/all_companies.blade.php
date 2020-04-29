@@ -1,6 +1,9 @@
 @extends('layouts.main')
 
 @section('content')
+<?php
+$subtext = ['fa-map-marker'=>'location']
+?>
 <!-- bradcam_area  -->
 <x-frontend.Banner2 message="Let's Scale Your Data" />
 
@@ -19,17 +22,10 @@
                 </div>
 
                 <div class="job_lists m-0">
-                    <x-frontend.lists/>
+                    <x-frontend.lists :data="$data" :subtext="$subtext" nameRedirect="companyDetails" action1Redirect="companyDetails"/>
                     <div class="row">
                         <div class="col-lg-12">
-                            <div class="pagination_wrap">
-                                <ul>
-                                    <li><a href="#"> <i class="ti-angle-left"></i> </a></li>
-                                    <li><a href="#"><span>01</span></a></li>
-                                    <li><a href="#"><span>02</span></a></li>
-                                    <li><a href="#"> <i class="ti-angle-right"></i> </a></li>
-                                </ul>
-                            </div>
+                            {{$data->links()}}
                         </div>
                     </div>
                 </div>

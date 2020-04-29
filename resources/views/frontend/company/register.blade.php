@@ -1,6 +1,12 @@
 @extends('layouts.main')
 
 @section('content')
+    <style>
+        .nice-select ul{
+            height:200px;
+            overflow-y: scroll !important;
+        }
+    </style>
     <!-- bradcam_area  -->
     <x-frontend.Banner2 message="Add Company" />
 
@@ -23,7 +29,7 @@
 
 
 
-                        <form action="" method="post">
+                        <form action="{{url('/saveCompany')}}" method="post">
                             @csrf
                             <div class="row">
                             <div class="col-md-6">
@@ -38,49 +44,56 @@
                                            class="single-input">
                                 </div>
                                 <div class="mt-10">
-                                    <input type="text" name="address1" placeholder="Address line 2"
+                                    <input type="text" name="address2" placeholder="Address line 2"
                                            onfocus="this.placeholder = ''" onblur="this.placeholder = 'Address line 2'" required
                                            class="single-input">
                                 </div>
                                 <div class="mt-10">
-                                    <input type="text" name="address1" placeholder="Address line 3"
+                                    <input type="text" name="address3" placeholder="Address line 3"
                                            onfocus="this.placeholder = ''" onblur="this.placeholder = 'Address line 3'" required
+                                           class="single-input">
+                                </div>
+                                <div class="mt-10">
+                                    <input type="text" name="zip" placeholder="Zip Code"
+                                           onfocus="this.placeholder = ''" onblur="this.placeholder = 'Zip Code'" required
                                            class="single-input">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="mt-10">
-                                    <input type="text" name="name" placeholder="Contact Number"
+                                    <input type="text" name="number" placeholder="Contact Number"
                                            onfocus="this.placeholder = ''" onblur="this.placeholder = 'Contact Number'" required
                                            class="single-input">
                                 </div>
                                 <div class="mt-10">
-                                    <input type="text" name="name" placeholder="Contact Email"
+                                    <input type="text" name="email" placeholder="Contact Email"
                                            onfocus="this.placeholder = ''" onblur="this.placeholder = 'Contact Email'" required
                                            class="single-input">
                                 </div>
                                 <div class="input-group-icon mt-10">
                                     <div class="icon"><i class="fa fa-plane" aria-hidden="true"></i></div>
                                     <div class="form-select" id="default-select"">
-                                    <select>
-                                        <option value=" 1">City</option>
-                                        <option value="1">Dhaka</option>
-                                        <option value="1">Dilli</option>
-                                        <option value="1">Newyork</option>
-                                        <option value="1">Islamabad</option>
+                                    <select name="city_id">
+                                        <option value="">City</option>
+                                        @foreach($cities as $city)
+                                            <option value="{{$city->id}}">{{$city->city_name}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="input-group-icon mt-10">
                                     <div class="icon"><i class="fa fa-plane" aria-hidden="true"></i></div>
-                                    <div class="form-select" id="default-select"">
-                                    <select>
+                                    <div class="form-select" >
+                                    <select name="state_id" class="form-control">
                                         <option value=" 1">State</option>
-                                        <option value="1">Dhaka</option>
-                                        <option value="1">Dilli</option>
-                                        <option value="1">Newyork</option>
-                                        <option value="1">Islamabad</option>
+                                        @foreach($states as $state)
+                                            <option value="{{$state->id}}">{{$state->name}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
+                                <div class="input-group-icon mt-10">
+                                    <input type="submit" class="btn btn-primary" style="width:100%">
+                                </div>
+
                             </div>
                             </div>
                         </form>

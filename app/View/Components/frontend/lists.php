@@ -11,9 +11,17 @@ class lists extends Component
      *
      * @return void
      */
-    public function __construct()
+    public $data;
+    public $nameRedirect;
+    public $action1Redirect;
+    public $subtext;
+    public function __construct($data=null,$nameRedirect=null,$action1Redirect=null,$subtext=null)
     {
         //
+        $this->data = $data;
+        $this->nameRedirect = $nameRedirect;
+        $this->action1Redirect = $action1Redirect;
+        $this->subtext = $subtext;
     }
 
     /**
@@ -23,6 +31,6 @@ class lists extends Component
      */
     public function render()
     {
-        return view('components.frontend.lists');
+        return view('components.frontend.lists',['data'=>$this->data]);
     }
 }

@@ -13,20 +13,23 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('frontend.main');
-});
+Route::get('/', 'MainController@mainPage');
+Route::post('/saveCompany','CompanyDetailController@store');
 
-Route::get('/allCompanies', function () {
-    return view('frontend.all_companies');
-});
+Route::get('/allCompanies', 'CompanyDetailController@index');
 
-Route::get('/companyDetails', function () {
-    return view('frontend.company_details');
-});
+Route::get('/companyDetails/{id}','CompanyDetailController@showDetail');
+Route::get('/getCities/{id}','CommonController@getCities');
 
 Route::get('/contactUs', function () {
+
     return view('frontend.contact_us');
+});
+
+
+/***************************** REGISTER COMPANIES ***********************/
+Route::group(['middleware'=>['auth']],function() {
+    Route::get('/registerCompanies', 'CompanyDetailController@create');
 });
 
 Auth::routes();

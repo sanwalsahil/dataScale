@@ -8,6 +8,7 @@ use App\CompanyContactEmail;
 use Auth;
 use App\State;
 use App\City;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class CompanyDetailController extends Controller
@@ -17,6 +18,9 @@ class CompanyDetailController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+
+
     public function index()
     {
         //
@@ -46,9 +50,11 @@ class CompanyDetailController extends Controller
      */
     public function store(Request $request)
     {
+        //dd($request->input('number'));
 
         if($file = $request->file('logo')){
-            $path = $file->store('frontend/company_images/logo');
+            $path = $file->store('public/frontend/company_images/logo');
+            $path = str_replace('public/','',$path);
         }else{
             $path = 'frontend/company_images/logo/default-logo.png';
         }
@@ -75,30 +81,38 @@ class CompanyDetailController extends Controller
             'number.numeric'=>'Contact Number Must Be Numeric',
             'email.email'=>'Please Enter Email In Correct Format'
         ]);
+        DB::beginTransaction();
+        try{
+            $company = new CompanyDetail();
+            $company->name = $request->input('name');
+            $company->address1 = $request->input('address1');
+            $company->address2 = $request->input('address2');
+            $company->address3 = $request->input('address3');
+            $company->city_id = $request->input('city_id');
+            $company->state_id = $request->input('state_id');
+            $company->zip = $request->input('zip');
+            $company->user_id = Auth::user()->id;
+            $company->description = $request->input('description');
+            $company->logo_path = $path;
+            $company->website = $request->input('website');
+            $company->save();
 
-        $company = new CompanyDetail();
-        $company->name = $request->input('name');
-        $company->address1 = $request->input('address1');
-        $company->address2 = $request->input('address2');
-        $company->address3 = $request->input('address3');
-        $company->city_id = $request->input('city_id');
-        $company->state_id = $request->input('state_id');
-        $company->zip = $request->input('zip');
-        $company->user_id = Auth::user()->id;
-        $company->description = $request->input('description');
-        $company->logo_path = $path;
-        $company->website = $request->input('website');
-        $company->save();
+            $number = new CompanyContactNumber();
+            $number->number = $request->input('number');
+            $company->CompanyContactNumbers()->save($number);
 
-        $number = new CompanyContactNumber();
-        $number->number = $request->input('number');
-        $company->CompanyContactNumbers()->save($number);
+            $email = new CompanyContactEmail();
+            $email->email = $request->input('email');
+            $company->CompanyContactEmails()->save($email);
+            DB::commit();
 
-        $email = new CompanyContactEmail();
-        $email->email = $request->input('email');
-        $company->CompanyContactEmails()->save($email);
+            return redirect(url('/companyDetails/'.$company->id))->with('status', 'Company Added Successfully !');
+        }catch(\Exception $e){
+            DB::rollback();
+            return redirect(url('/'));
+        }
 
-        return redirect(url('/companyDetails/'.$company->id));
+
     }
 
     /**

@@ -91,8 +91,22 @@
                                 </div>
                                 <div class="input-group-icon mt-10">
                                     <div class="icon"><i class="fa fa-plane" aria-hidden="true"></i></div>
+                                    <div class="form-select" >
+                                        <select name="state_id" class="form-control" id="state_id">
+                                            <option value="">State</option>
+                                            @foreach($states as $state)
+                                                <option value="{{$state->id}}">{{$state->name}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    @error('state_id')
+                                    <div class="alert-danger" style="background-color:white;padding-left:10px">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="input-group-icon mt-10">
+                                    <div class="icon"><i class="fa fa-plane" aria-hidden="true"></i></div>
                                     <div class="form-select" id="default-select">
-                                    <select name="city_id">
+                                    <select class="city_id" name="city_id" id="city_id">
                                         <option value="">City</option>
                                         @foreach($cities as $city)
                                             <option value="{{$city->id}}">{{$city->city_name}}</option>
@@ -104,20 +118,7 @@
                                     @enderror
 
                                 </div>
-                                <div class="input-group-icon mt-10">
-                                    <div class="icon"><i class="fa fa-plane" aria-hidden="true"></i></div>
-                                    <div class="form-select" >
-                                    <select name="state_id" class="form-control">
-                                        <option value="">State</option>
-                                        @foreach($states as $state)
-                                            <option value="{{$state->id}}">{{$state->name}}</option>
-                                        @endforeach
-                                    </select>
-                                    </div>
-                                    @error('state_id')
-                                    <div class="alert-danger" style="background-color:white;padding-left:10px">{{ $message }}</div>
-                                    @enderror
-                                </div>
+
                                 <div class="mt-10">
                                     <input type="text" name="website" placeholder="Company Website"
                                            onfocus="this.placeholder = ''" onblur="this.placeholder = 'Company Website'"
@@ -146,4 +147,25 @@
             </div>
         </div>
     </div>
+    <script>
+        $('#state_id').change(function(){
+            $.ajax({
+                url:"<?php echo url('/getCities') ?>"+'/'+$('#state_id').val(),
+                type:'get',
+                success:function(cities){
+                    var html='<option value="">City</option>';
+                    res = $.parseJSON(cities);
+                    $.each(res,function(key,value){
+                        html += '<option value="'+value.id+'">'+value.city_name+'</option>'
+
+                    });
+                    console.log(html);
+                    $('select.city_id').html(html); //Make sure you update the SELECT element. not the DIV (by adding "select.xxx").
+                    $('select.city_id').niceSelect('update'); //Tell the plugin to recreate the DIV.
+
+
+                }
+            })
+        })
+    </script>
 @endsection

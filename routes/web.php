@@ -19,6 +19,7 @@ Route::post('/saveCompany','CompanyDetailController@store');
 Route::get('/allCompanies', 'CompanyDetailController@index');
 
 Route::get('/companyDetails/{id}','CompanyDetailController@showDetail');
+Route::get('/getCities/{id}','CommonController@getCities');
 
 Route::get('/contactUs', function () {
 

@@ -5,7 +5,7 @@
                 <div class="single_jobs white-bg d-flex justify-content-between">
                     <div class="jobs_left d-flex align-items-center">
                         <div class="thumb">
-                            <img src="{{asset('frontend/img/svg_icon/1.svg')}}" alt="">
+                            <img src="<?php echo url('storage/'.$row->logo_path) ?>" style="width:100%" alt="">
                         </div>
                         <div class="jobs_conetent">
                             <a href="<?php echo url('/'.$nameRedirect.'/'.$row->id) ?>"><h4>{{$row->name}}</h4></a>

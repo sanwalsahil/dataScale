@@ -6,19 +6,28 @@
 
 <div class="job_details_area">
     <div class="container">
+        @if (session('status'))
+            <div style="text-align:center" class="alert alert-success">
+                {{ session('status') }}
+            </div>
+        @endif
         <div class="row">
+
             <div class="col-lg-8">
                 <div class="job_details_header">
                     <div class="single_jobs white-bg d-flex justify-content-between">
                         <div class="jobs_left d-flex align-items-center">
                             <div class="thumb">
-                                <img src="{{asset('frontend/img/svg_icon/1.svg')}}" alt="">
+                                <img style="width:100%" src="<?php echo url('storage/'.$company->logo_path) ?>" alt="">
                             </div>
                             <div class="jobs_conetent">
                                 <a href="#"><h4>{{$company->name}}</h4></a>
                                 <div class="links_locat d-flex align-items-center">
                                     <div class="location">
                                         <p> <i class="fa fa-map-marker"></i>{{$company->City->city_name}},{{$company->states->name}},{{$company->zip}}</p>
+                                    </div>
+                                    <div class="location">
+                                        <p> <i class="fa fa-globe"></i>{{$company->website}}</p>
                                     </div>
                                 </div>
                             </div>
@@ -33,8 +42,7 @@
                 <div class="descript_wrap white-bg">
                     <div class="single_wrap">
                         <h4>About {{$company->name}}</h4>
-                        <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing.</p>
-                        <p>Variations of passages of lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing.</p>
+                        {{$company->description}}
                     </div>
 
 
